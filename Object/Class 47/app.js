@@ -60,3 +60,30 @@ console.log(stdFullName);
 
 let stdTotalMarks = std.getTotalMarks();
 console.log("Total Marks", stdTotalMarks);
+
+// Automatic Carousel Script
+(function() {
+  const carousel = document.querySelector('.carousel');
+  if (!carousel) return;
+  const images = carousel.querySelectorAll('img');
+  let currentIndex = 0;
+  const total = images.length;
+
+  function updateCarousel() {
+    carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+  }
+
+  function nextSlide() {
+    currentIndex = (currentIndex + 1) % total;
+    updateCarousel();
+  }
+
+  // Set all images to 100% width of container
+  carousel.style.width = `${total * 100}%`;
+  images.forEach(img => {
+    img.style.width = `${100 / total}%`;
+    img.style.flex = `0 0 ${100 / total}%`;
+  });
+
+  setInterval(nextSlide, 3000);
+})();
