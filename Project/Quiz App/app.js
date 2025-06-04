@@ -72,7 +72,7 @@ function uiRender() {
 
 
     options.innerHTML = "";
-    for(let key in optionList){
+    for (let key in optionList) {
         console.log(optionList[key]);
 
         options.innerHTML += `<li onclick ="checkAns(this)">${optionList[key]}</li>`;
@@ -81,29 +81,50 @@ function uiRender() {
 }
 
 
-function nextQues(){
-    indexNumber++;
+function nextQues() {
+    if(indexNumber < quizQuestion.length){
+        indexNumber++;
+        uiRender();
+    }
+    else{
+        console.log("Quiz Submit")
+    }
     console.log(indexNumber);
-    uiRender();
-count.innerHTML = `${indexNumber + 1} / ${quizQuestion.length}`
+    count.innerHTML = `${indexNumber + 1} / ${quizQuestion.length}`
 
 }
 
 
 
-function checkAns(ele){
+function checkAns(ele) {
     console.log(ele.innerHTML);
+    let allLi = document.getElementById("options").children
+
     let userSelection = ele.innerHTML;
     const correctAns = quizQuestion[indexNumber].answer;
 
-    if(userSelection ===  correctAns){
+    if (userSelection === correctAns) {
         console.log("correct");
         ele.style.background = "green";
     }
-    else{
+    else {
         console.log("wrong");
         ele.style.background = "red";
 
+        for (i = 0; i < allLi.length; i++) {
+            // console.log(allLi[i].innerHTML);
+            if(allLi[i].innerHTML === correctAns){
+                allLi[i].style.background = "green";
+                break;
+            }
+        }
+
+    }
+
+
+    console.log(allLi);
+    for (let i = 0; i < allLi.length; i++) {
+        allLi[i].style.pointerEvents = "none";
     }
 
 }
