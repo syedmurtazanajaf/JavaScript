@@ -143,5 +143,16 @@ function checkAns(ele) {
 
 }
 
+function userDetails() {
+
+    let user = JSON.parse(localStorage.getItem("user"));
+    console.log(user);
+    let userName = document.querySelector("#userName");
+    let userEmail = document.querySelector("#userEmail");
+
+    userName.innerHTML = user.name
+    userEmail.innerHTML = user.email
+}
+
 
 console.log(quizQuestion);
