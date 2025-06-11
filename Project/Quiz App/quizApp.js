@@ -98,8 +98,30 @@ function nextQues() {
         console.log("wrongAnsCount", wrongAnsCount);
         console.log("Total no of Ques", quizQuestion.length);
         console.log("Percentage", (correctAnsCount / quizQuestion.length) * 100);
+        let percentage = (correctAnsCount / quizQuestion.length) * 100;
+
+        let rank;
+        if (percentage < 50) {
+            console.log("Tata bye bye");
+            rank = "F"
+        } else {
+            rank = "P"
+            console.log("Pappu pass hogaya")
+        }
+
+
+        let reportObj = {
+            totalQues: quizQuestion.length,
+            correctAnsCount,
+            wrongAnsCount,
+            percentage,
+            rank,
+        }
+        console.log(reportObj);
+        localStorage.setItem("report", JSON.stringify(reportObj));
+        window.location.replace("./reportCard.html");
     }
-    // console.log(indexNumber);
+
 
     nextbtn.disabled = true;
 
