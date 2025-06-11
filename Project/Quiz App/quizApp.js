@@ -177,4 +177,48 @@ function userDetails() {
 }
 
 
+let totalTime = 1 * 60;
+const timer = document.querySelector("#timer");
+
+const updateTimer = () => {
+    let min = Math.floor(totalTime / 60);
+    let sec = totalTime % 60;
+
+    timer.textContent = `Time: ${min}:${sec < 0 ? '0' + sec : sec}`;
+    if (totalTime > 0) {
+        totalTime--;
+    }
+    else {
+        clearInterval(timerInterval);
+        alert("Time is Up!");
+
+
+        let percentage = (correctAnsCount / quizQuestion.length) * 100;
+
+        let rank;
+        if (percentage < 50) {
+            rank = "F";
+        } else {
+            rank = "P";
+        }
+
+        let reportObj = {
+            totalQues: quizQuestion.length,
+            correctAnsCount,
+            wrongAnsCount,
+            percentage,
+            rank,
+        };
+
+        localStorage.setItem("report", JSON.stringify(reportObj));
+        window.location.replace("./reportCard.html");
+    }
+};
+
+const timerInterval = setInterval(updateTimer, 1000);
+
+
+
+
 console.log(quizQuestion);
+
